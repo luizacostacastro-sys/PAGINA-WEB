@@ -11,121 +11,118 @@
     <header>
         <h1>O Futuro da Inteligência Artificial</h1>
         
-        <!-- Barra de ferramentas com botões funcionais -->
-        <div class="controles-topo">
-            <button id="btn-tema" class="btn">Alternar Modo Escuro/Claro</button>
-            <button id="btn-aumentar-fonte" class="btn">A+</button>
-            <button id="btn-diminuir-fonte" class="btn">A-</button>
+        <div class="barra-acoes">
+            <div class="grupo-fonte">
+                <button id="btn-diminuir-fonte" type="button" title="Diminuir texto">A-</button>
+                <button id="btn-aumentar-fonte" type="button" title="Aumentar texto">A+</button>
+            </div>
+            <button id="btn-tema" type="button">🌙 Modo Escuro</button>
         </div>
     </header>
 
-    <main>
-        <!-- Seção de Imagem Interativa -->
-        <section class="banner-ia">
+    <main id="conteudo-principal">
+        <figure class="imagem-destaque">
             <img id="imagem-principal" 
                  src="https://unsplash.com" 
                  alt="Representação visual de Inteligência Artificial">
-            
-            <div class="acoes-imagem">
-                <button id="btn-trocar-img" class="btn btn-secundario">Trocar Visualização de IA</button>
-            </div>
-        </section>
+            <figcaption class="legenda-imagem">
+                <span id="texto-legenda">Redes neurais e processamento de dados</span>
+                <button id="btn-trocar-img" type="button">🖼️ Trocar Imagem</button>
+            </figcaption>
+        </figure>
 
-        <!-- Parágrafo 1 original mantido -->
+        <!-- Parágrafo 1 original -->
         <p class="paragrafo-destaque">
             A <strong>Inteligência Artificial (IA)</strong> está transformando drasticamente a forma como vivemos e trabalhamos. No entanto, o verdadeiro impacto dessa tecnologia ainda está por vir, prometendo revolucionar setores inteiros como a <em>medicina de precisão</em>, a educação personalizada e a automação industrial sustentável.
         </p>
 
-        <!-- Parágrafo 2 original mantido -->
+        <!-- Parágrafo 2 original -->
         <p class="paragrafo-secundario">
             Para acompanhar essa evolução, a sociedade precisará focar na <strong>ética tecnológica</strong> e no desenvolvimento de novas habilidades humanas. O equilíbrio entre a <em>automação eficiente</em> e o toque humano será o grande diferencial para construir um futuro mais justo e inovador.
         </p>
 
-        <!-- Seção Interativa de Curiosidades / Impactos -->
-        <section class="interatividade-ia">
+        <!-- Seção Interativa -->
+        <section class="secao-pilares">
             <h2>Explore os Pilares do Futuro</h2>
-            <div class="grupo-botoes">
-                <button class="btn btn-pilar" data-pilar="medicina">Medicina de Precisão</button>
-                <button class="btn btn-pilar" data-pilar="educacao">Educação Personalizada</button>
-                <button class="btn btn-pilar" data-pilar="etica">Ética Tecnológica</button>
+            <div class="abas">
+                <button type="button" class="aba ativo" data-pilar="medicina">Medicina de Precisão</button>
+                <button type="button" class="aba" data-pilar="educacao">Educação Personalizada</button>
+                <button type="button" class="aba" data-pilar="etica">Ética Tecnológica</button>
             </div>
             
-            <!-- Caixa onde o texto muda ao clicar nos botões acima -->
-            <div id="caixa-info" class="caixa-info">
-                Clique em um dos botões acima para descobrir como a IA vai atuar nessa área!
+            <div id="caixa-info" class="conteudo-aba">
+                <strong>Medicina de Precisão:</strong> Algoritmos capazes de analisar exames genéticos e prever doenças anos antes dos primeiros sintomas, criando tratamentos sob medida para cada paciente.
             </div>
         </section>
     </main>
 
-    <!-- Script com todas as funcionalidades -->
     <script>
-        // 1. Alternar Tema (Adiciona/Remove a classe 'modo-escuro' no body)
+        // 1. Alternar Modo Escuro / Claro
         const btnTema = document.getElementById('btn-tema');
         btnTema.addEventListener('click', () => {
             document.body.classList.toggle('modo-escuro');
+            const escuroAtivo = document.body.classList.contains('modo-escuro');
+            btnTema.textContent = escuroAtivo ? '☀️ Modo Claro' : '🌙 Modo Escuro';
         });
 
-        // 2. Controle de Tamanho da Fonte (Acessibilidade)
-        let tamanhoFonte = 16;
-        const mainContent = document.querySelector('main');
-        
+        // 2. Aumentar e Diminuir Fonte
+        let escalaFonte = 100;
+        const main = document.getElementById('conteudo-principal');
+
         document.getElementById('btn-aumentar-fonte').addEventListener('click', () => {
-            if (tamanhoFonte < 24) {
-                tamanhoFonte += 2;
-                mainContent.style.fontSize = tamanhoFonte + 'px';
+            if (escalaFonte < 130) {
+                escalaFonte += 10;
+                main.style.fontSize = escalaFonte + '%';
             }
         });
 
         document.getElementById('btn-diminuir-fonte').addEventListener('click', () => {
-            if (tamanhoFonte > 12) {
-                tamanhoFonte -= 2;
-                mainContent.style.fontSize = tamanhoFonte + 'px';
+            if (escalaFonte > 80) {
+                escalaFonte -= 10;
+                main.style.fontSize = escalaFonte + '%';
             }
         });
 
-        // 3. Galeria: Trocar Imagem Principal
-        const imagens = [
+        // 3. Trocar Imagem e Legenda
+        const galeria = [
             {
                 url: "https://unsplash.com",
-                alt: "Representação abstrata de redes neurais e IA"
+                legenda: "Redes neurais e processamento de dados"
             },
             {
                 url: "https://unsplash.com",
-                alt: "Robótica e interação humano-máquina"
+                legenda: "Robótica avançada e interação humano-máquina"
             },
             {
                 url: "https://unsplash.com",
-                alt: "Segurança digital e ética tecnológica"
+                legenda: "Segurança digital e ética tecnológica"
             }
         ];
-        let indiceImagem = 0;
-        const imgElement = document.getElementById('imagem-principal');
+        let indiceImg = 0;
+        const imgEl = document.getElementById('imagem-principal');
+        const legendaEl = document.getElementById('texto-legenda');
 
         document.getElementById('btn-trocar-img').addEventListener('click', () => {
-            indiceImagem = (indiceImagem + 1) % imagens.length;
-            imgElement.src = imagens[indiceImagem].url;
-            imgElement.alt = imagens[indiceImagem].alt;
+            indiceImg = (indiceImg + 1) % galeria.length;
+            imgEl.src = galeria[indiceImg].url;
+            legendaEl.textContent = galeria[indiceImg].legenda;
         });
 
-        // 4. Botões de Conteúdo Dinâmico (Pilares)
+        // 4. Abas Interativas dos Pilares
         const conteudos = {
             medicina: "<strong>Medicina de Precisão:</strong> Algoritmos capazes de analisar exames genéticos e prever doenças anos antes dos primeiros sintomas, criando tratamentos sob medida para cada paciente.",
             educacao: "<strong>Educação Personalizada:</strong> Tutores virtuais inteligentes que adaptam o ritmo, a linguagem e os exercícios de acordo com a dificuldade individual de cada aluno.",
             etica: "<strong>Ética Tecnológica:</strong> Criação de leis, transparência nos algoritmos e auditorias para garantir que a IA não reproduza preconceitos e respeite a privacidade humana."
         };
 
-        const botoesPilar = document.querySelectorAll('.btn-pilar');
+        const abas = document.querySelectorAll('.aba');
         const caixaInfo = document.getElementById('caixa-info');
 
-        botoesPilar.forEach(botao => {
-            botao.addEventListener('click', () => {
-                // Remove destaque de outros botões
-                botoesPilar.forEach(b => b.classList.remove('ativo'));
-                // Adiciona destaque no botão clicado
-                botao.classList.add('ativo');
-                
-                const tema = botao.getAttribute('data-pilar');
-                caixaInfo.innerHTML = conteudos[tema];
+        abas.forEach(aba => {
+            aba.addEventListener('click', () => {
+                abas.forEach(item => item.classList.remove('ativo'));
+                aba.classList.add('ativo');
+                caixaInfo.innerHTML = conteudos[aba.dataset.pilar];
             });
         });
     </script>
