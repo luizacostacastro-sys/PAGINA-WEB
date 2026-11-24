@@ -1,12 +1,18 @@
+/* Reset básico para garantir consistência em qualquer navegador */
+* {
+    box-sizing: border-box;
+}
+
 /* Configurações gerais da página */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f7f6;
     color: #333333;
     line-height: 1.6;
-    padding: 40px;
+    padding: 40px 20px;
     max-width: 800px;
     margin: 0 auto;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Estilo do Título principal */
@@ -15,147 +21,171 @@ header h1 {
     text-align: center;
     border-bottom: 3px solid #3182ce;
     padding-bottom: 15px;
-    margin-bottom: 30px;
+    margin-top: 0;
+    margin-bottom: 16px;
 }
 
-/* Estilização do Primeiro Parágrafo (Cores e Destaques) */
-.paragrafo-destaque {
-    font-size: 1.15rem;
-    color: #2c5282; /* Tom de azul escuro */
-    background-color: #ebf8ff; /* Fundo azul bem claro */
-    padding: 20px;
-    border-left: 5px solid #3182ce;
-    border-radius: 4px;
-    margin-bottom: 20px;
-}
-
-/* Estilização do Segundo Parágrafo (Cores e Destaques) */
-.paragrafo-secundario {
-    font-size: 1.1rem;
-    color: #2d3748; /* Tom de cinza escuro */
-    background-color: #f7fafc; /* Fundo cinza claro */
-    padding: 20px;
-    border-left: 5px solid #4a5568;
-    border-radius: 4px;
-}
-
-/* Customização dos negritos e itálicos dentro dos parágrafos */
-strong {
-    color: #e53e3e; /* Vermelho destacado para termos em negrito */
-}
-
-em {
-    color: #319795; /* Verde/Ciano para termos em itálico */
-    font-weight: 500;
-}
-/* =========================================================
-   NOVOS ESTILOS ADICIONADOS (Botões, Imagem e Modo Escuro)
-   ========================================================= */
-
-/* Transição suave ao alternar entre modo claro e escuro */
-body {
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Barra de botões no topo */
-.controles-topo {
+/* Barra superior com botões */
+.barra-acoes {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
     gap: 10px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
 }
 
-/* Estilo padrão dos botões (combinando com o azul do seu tema) */
-.btn {
-    background-color: #3182ce;
-    color: #ffffff;
-    border: none;
-    padding: 10px 16px;
-    font-size: 0.95rem;
+.grupo-fonte {
+    display: flex;
+    gap: 6px;
+}
+
+.barra-acoes button {
+    background-color: #ffffff;
+    color: #2c5282;
+    border: 1px solid #cbd5e0;
+    padding: 7px 14px;
+    font-family: inherit;
+    font-size: 0.88rem;
     font-weight: 600;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    transition: all 0.2s ease;
 }
 
-.btn:hover {
+.barra-acoes button:hover {
+    background-color: #3182ce;
+    color: #ffffff;
+    border-color: #3182ce;
+}
+
+/* Imagem e barra de legenda com botão */
+.imagem-destaque {
+    margin: 0 0 28px 0;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.imagem-destaque img {
+    width: 100%;
+    height: 310px;
+    object-fit: cover;
+    display: block;
+}
+
+.legenda-imagem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    color: #4a5568;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.legenda-imagem button {
+    background-color: #3182ce;
+    color: #ffffff;
+    border: none;
+    padding: 7px 14px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.legenda-imagem button:hover {
     background-color: #2c5282;
 }
 
-.btn:active {
-    transform: scale(0.97);
-}
-
-/* Botão secundário (usado para trocar a imagem) */
-.btn-secundario {
-    background-color: #4a5568;
-}
-
-.btn-secundario:hover {
-    background-color: #2d3748;
-}
-
-/* Seção da Imagem Principal */
-.banner-ia {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.banner-ia img {
-    width: 100%;
-    max-height: 360px;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 2px solid #cbd5e0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    transition: opacity 0.3s ease;
-}
-
-.acoes-imagem {
-    margin-top: 12px;
-}
-
-/* Seção Interativa dos Pilares */
-.interatividade-ia {
-    margin-top: 35px;
-    padding-top: 25px;
-    border-top: 2px solid #e2e8f0;
-}
-
-.interatividade-ia h2 {
-    color: #1a365d;
-    font-size: 1.4rem;
-    text-align: center;
-    margin-bottom: 18px;
-}
-
-.grupo-botoes {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
+/* Estilização do Primeiro Parágrafo */
+.paragrafo-destaque {
+    font-size: 1.15em;
+    color: #2c5282;
+    background-color: #ebf8ff;
+    padding: 20px;
+    border-left: 5px solid #3182ce;
+    border-radius: 4px;
+    margin-top: 0;
     margin-bottom: 20px;
 }
 
-/* Destaque para o botão de pilar que estiver selecionado */
-.btn-pilar.ativo {
-    background-color: #319795; /* Usa o mesmo verde/ciano do seu <em> */
-    box-shadow: 0 0 0 3px rgba(49, 151, 149, 0.3);
+/* Estilização do Segundo Parágrafo */
+.paragrafo-secundario {
+    font-size: 1.1em;
+    color: #2d3748;
+    background-color: #f7fafc;
+    padding: 20px;
+    border-left: 5px solid #4a5568;
+    border-radius: 4px;
+    margin-top: 0;
+    margin-bottom: 32px;
 }
 
-/* Caixa onde o texto dinâmico aparece */
-.caixa-info {
+/* Negritos e itálicos */
+strong {
+    color: #e53e3e;
+}
+
+em {
+    color: #319795;
+    font-weight: 500;
+}
+
+/* Seção Interativa de Abas */
+.secao-pilares h2 {
+    color: #1a365d;
+    font-size: 1.3rem;
+    margin-bottom: 14px;
+}
+
+.abas {
+    display: flex;
+    gap: 6px;
+    border-bottom: 2px solid #cbd5e0;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.aba {
+    background: none;
+    border: none;
+    padding: 10px 16px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #4a5568;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.aba:hover {
+    color: #3182ce;
+}
+
+.aba.ativo {
+    color: #3182ce;
+    border-bottom-color: #3182ce;
+}
+
+.conteudo-aba {
     background-color: #ffffff;
     border-left: 5px solid #319795;
-    padding: 20px;
+    padding: 18px 20px;
     border-radius: 4px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    font-size: 1.05rem;
+    font-size: 1.05em;
 }
 
 /* =========================================================
-   MODO ESCURO (Ativado pelo botão 'Alternar Modo Escuro/Claro')
+   MODO ESCURO
    ========================================================= */
 body.modo-escuro {
     background-color: #1a202c;
@@ -163,9 +193,30 @@ body.modo-escuro {
 }
 
 body.modo-escuro header h1,
-body.modo-escuro .interatividade-ia h2 {
+body.modo-escuro .secao-pilares h2 {
     color: #90cdf4;
     border-bottom-color: #4299e1;
+}
+
+body.modo-escuro .barra-acoes button {
+    background-color: #2d3748;
+    color: #e2e8f0;
+    border-color: #4a5568;
+}
+
+body.modo-escuro .barra-acoes button:hover {
+    background-color: #3182ce;
+    color: #ffffff;
+    border-color: #3182ce;
+}
+
+body.modo-escuro .imagem-destaque {
+    background-color: #2d3748;
+    border-color: #4a5568;
+}
+
+body.modo-escuro .legenda-imagem {
+    color: #cbd5e0;
 }
 
 body.modo-escuro .paragrafo-destaque {
@@ -180,20 +231,25 @@ body.modo-escuro .paragrafo-secundario {
     border-left-color: #a0aec0;
 }
 
-body.modo-escuro .caixa-info {
+body.modo-escuro .aba {
+    color: #a0aec0;
+}
+
+body.modo-escuro .aba.ativo {
+    color: #63b3ed;
+    border-bottom-color: #63b3ed;
+}
+
+body.modo-escuro .conteudo-aba {
     background-color: #2d3748;
     color: #edf2f7;
     border-left-color: #4fd1c5;
 }
 
 body.modo-escuro strong {
-    color: #fc8181; /* Vermelho mais claro para dar leitura no fundo escuro */
+    color: #fc8181;
 }
 
 body.modo-escuro em {
-    color: #4fd1c5; /* Ciano mais claro para dar leitura no fundo escuro */
-}
-
-body.modo-escuro .banner-ia img {
-    border-color: #4a5568;
+    color: #4fd1c5;
 }
