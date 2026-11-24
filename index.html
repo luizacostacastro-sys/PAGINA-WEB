@@ -10,19 +10,124 @@
 
     <header>
         <h1>O Futuro da Inteligência Artificial</h1>
+        
+        <!-- Barra de ferramentas com botões funcionais -->
+        <div class="controles-topo">
+            <button id="btn-tema" class="btn">Alternar Modo Escuro/Claro</button>
+            <button id="btn-aumentar-fonte" class="btn">A+</button>
+            <button id="btn-diminuir-fonte" class="btn">A-</button>
+        </div>
     </header>
 
     <main>
-        <!-- Parágrafo 1 com estilizações inline solicitadas e classes -->
+        <!-- Seção de Imagem Interativa -->
+        <section class="banner-ia">
+            <img id="imagem-principal" 
+                 src="https://unsplash.com" 
+                 alt="Representação visual de Inteligência Artificial">
+            
+            <div class="acoes-imagem">
+                <button id="btn-trocar-img" class="btn btn-secundario">Trocar Visualização de IA</button>
+            </div>
+        </section>
+
+        <!-- Parágrafo 1 original mantido -->
         <p class="paragrafo-destaque">
             A <strong>Inteligência Artificial (IA)</strong> está transformando drasticamente a forma como vivemos e trabalhamos. No entanto, o verdadeiro impacto dessa tecnologia ainda está por vir, prometendo revolucionar setores inteiros como a <em>medicina de precisão</em>, a educação personalizada e a automação industrial sustentável.
         </p>
 
-        <!-- Parágrafo 2 com estilizações inline solicitadas e classes -->
+        <!-- Parágrafo 2 original mantido -->
         <p class="paragrafo-secundario">
             Para acompanhar essa evolução, a sociedade precisará focar na <strong>ética tecnológica</strong> e no desenvolvimento de novas habilidades humanas. O equilíbrio entre a <em>automação eficiente</em> e o toque humano será o grande diferencial para construir um futuro mais justo e inovador.
         </p>
+
+        <!-- Seção Interativa de Curiosidades / Impactos -->
+        <section class="interatividade-ia">
+            <h2>Explore os Pilares do Futuro</h2>
+            <div class="grupo-botoes">
+                <button class="btn btn-pilar" data-pilar="medicina">Medicina de Precisão</button>
+                <button class="btn btn-pilar" data-pilar="educacao">Educação Personalizada</button>
+                <button class="btn btn-pilar" data-pilar="etica">Ética Tecnológica</button>
+            </div>
+            
+            <!-- Caixa onde o texto muda ao clicar nos botões acima -->
+            <div id="caixa-info" class="caixa-info">
+                Clique em um dos botões acima para descobrir como a IA vai atuar nessa área!
+            </div>
+        </section>
     </main>
 
+    <!-- Script com todas as funcionalidades -->
+    <script>
+        // 1. Alternar Tema (Adiciona/Remove a classe 'modo-escuro' no body)
+        const btnTema = document.getElementById('btn-tema');
+        btnTema.addEventListener('click', () => {
+            document.body.classList.toggle('modo-escuro');
+        });
+
+        // 2. Controle de Tamanho da Fonte (Acessibilidade)
+        let tamanhoFonte = 16;
+        const mainContent = document.querySelector('main');
+        
+        document.getElementById('btn-aumentar-fonte').addEventListener('click', () => {
+            if (tamanhoFonte < 24) {
+                tamanhoFonte += 2;
+                mainContent.style.fontSize = tamanhoFonte + 'px';
+            }
+        });
+
+        document.getElementById('btn-diminuir-fonte').addEventListener('click', () => {
+            if (tamanhoFonte > 12) {
+                tamanhoFonte -= 2;
+                mainContent.style.fontSize = tamanhoFonte + 'px';
+            }
+        });
+
+        // 3. Galeria: Trocar Imagem Principal
+        const imagens = [
+            {
+                url: "https://unsplash.com",
+                alt: "Representação abstrata de redes neurais e IA"
+            },
+            {
+                url: "https://unsplash.com",
+                alt: "Robótica e interação humano-máquina"
+            },
+            {
+                url: "https://unsplash.com",
+                alt: "Segurança digital e ética tecnológica"
+            }
+        ];
+        let indiceImagem = 0;
+        const imgElement = document.getElementById('imagem-principal');
+
+        document.getElementById('btn-trocar-img').addEventListener('click', () => {
+            indiceImagem = (indiceImagem + 1) % imagens.length;
+            imgElement.src = imagens[indiceImagem].url;
+            imgElement.alt = imagens[indiceImagem].alt;
+        });
+
+        // 4. Botões de Conteúdo Dinâmico (Pilares)
+        const conteudos = {
+            medicina: "<strong>Medicina de Precisão:</strong> Algoritmos capazes de analisar exames genéticos e prever doenças anos antes dos primeiros sintomas, criando tratamentos sob medida para cada paciente.",
+            educacao: "<strong>Educação Personalizada:</strong> Tutores virtuais inteligentes que adaptam o ritmo, a linguagem e os exercícios de acordo com a dificuldade individual de cada aluno.",
+            etica: "<strong>Ética Tecnológica:</strong> Criação de leis, transparência nos algoritmos e auditorias para garantir que a IA não reproduza preconceitos e respeite a privacidade humana."
+        };
+
+        const botoesPilar = document.querySelectorAll('.btn-pilar');
+        const caixaInfo = document.getElementById('caixa-info');
+
+        botoesPilar.forEach(botao => {
+            botao.addEventListener('click', () => {
+                // Remove destaque de outros botões
+                botoesPilar.forEach(b => b.classList.remove('ativo'));
+                // Adiciona destaque no botão clicado
+                botao.classList.add('ativo');
+                
+                const tema = botao.getAttribute('data-pilar');
+                caixaInfo.innerHTML = conteudos[tema];
+            });
+        });
+    </script>
 </body>
 </html>
